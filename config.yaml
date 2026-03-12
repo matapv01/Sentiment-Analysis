@@ -1,0 +1,46 @@
+# ============================================================
+# Sentiment Analysis Pipeline Configuration (PhoBERT SOTA)
+# ============================================================
+
+# --- Paths ---
+paths:
+  data_dir: "data"
+  checkpoint_dir: "checkpoint"
+  output_dir: "output"
+  train_file: "train.csv"
+  test_file: "test.csv"
+  submission_file: "submission.csv"
+
+# --- Random Seed ---
+seed: 42
+
+# --- Cross Validation ---
+cv:
+  n_splits: 5
+  shuffle: true
+
+# --- PhoBERT Config ---
+phobert:
+  model_name: "vinai/phobert-base"
+  max_length: 128
+  batch_size: 32
+  accumulation_steps: 1
+
+# --- Topic Model (PhoBERT Fine-tune) ---
+topic_model:
+  num_class: 4
+  epochs: 5
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  dropout: 0.1
+
+# --- Sentiment Model (PhoBERT Fine-tune) ---
+sentiment_model:
+  num_class: 3
+  epochs: 5
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  dropout: 0.1
+  topic_feature_dim: 4
